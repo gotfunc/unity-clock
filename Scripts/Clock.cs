@@ -10,25 +10,20 @@ namespace Shade
 
         void Start()
         {
-            // Initialize value
             if (! PlayerPrefs.HasKey("Clock_Lifespan"))
             {
                 PlayerPrefs.SetFloat("Clock_Lifespan", Time.time);
             }
             
             DateTime now = DateTime.Now;
-            DateTime then = DateTime.Now; // Will reference to last seen time
+            DateTime then = DateTime.Now; // Reference to last seen
 
             if (PlayerPrefs.HasKey("Clock_LastSeen"))
             {
-                // Grab the old time from the player prefs as a long
                 long temp = Convert.ToInt64(PlayerPrefs.GetString("Clock_LastSeen"));
-
-                // Convert the old time from binary to a DataTime variable
                 then = DateTime.FromBinary(temp);
             }
 
-            //Use the Subtract method and store the result as a timespan variable
             TimeSpan difference = now.Subtract(then);
 
             time = PlayerPrefs.GetFloat("Clock_Lifespan") + Convert.ToSingle(difference.TotalSeconds);

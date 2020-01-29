@@ -1,7 +1,7 @@
 # Unity Clock
 A class to track total play time in Unity.
 
-## How to use
+## How to use
 
 Simply create an empty or attach the script to an existing GameObject, then in your script make a reference to the clock like the following:
 

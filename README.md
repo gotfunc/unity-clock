@@ -6,9 +6,6 @@ A class to track total play time in Unity.
 Simply create an empty or attach the script to an existing GameObject, then in your script make a reference to the clock like the following:
 
 ```csharp
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Shade;
 

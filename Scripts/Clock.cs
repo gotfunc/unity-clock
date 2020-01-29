@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shade
@@ -10,12 +8,8 @@ namespace Shade
         [HideInInspector]
         public float time = 0f;
 
-        // Start is called before the first frame update
         void Start()
         {
-            // Initialize key
-            // _key = "Clock_Lifespan_" + Mathf.Abs(gameObject.GetInstanceID());
-            
             // Initialize value
             if (! PlayerPrefs.HasKey("Clock_Lifespan"))
             {
@@ -38,7 +32,7 @@ namespace Shade
             TimeSpan difference = now.Subtract(then);
 
             time = PlayerPrefs.GetFloat("Clock_Lifespan") + Convert.ToSingle(difference.TotalSeconds);
-            
+
             PlayerPrefs.SetFloat("Clock_Lifespan", time);
         }
 
@@ -51,7 +45,7 @@ namespace Shade
 
         void OnApplicationQuit()
         {   
-            PlayerPrefs.SetString("Clock_StoppedAt", System.DateTime.Now.ToBinary().ToString());
+            PlayerPrefs.SetString("Clock_LastSeen", System.DateTime.Now.ToBinary().ToString());
         }
     }
 }

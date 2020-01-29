@@ -1,6 +1,10 @@
 # Unity Clock
 A class to track total play time in Unity.
 
+## What is it for
+
+It is useful for games that need to know how long the player was absent from the game. Regardless of how many times the person has played the game, or has closed it, the clock will always give you the total time since the player has first started playing the the game.
+
 ## How to use
 
 Simply create an empty or attach the script to an existing GameObject, then in your script make a reference to the clock like the following:

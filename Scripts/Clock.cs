@@ -11,41 +11,48 @@ namespace Shade
         void Start()
         {
             // Initialize value
-            if (! PlayerPrefs.HasKey("Clock_Lifespan"))
+            if (! PlayerPrefs.HasKey("Shade_Clock_Lifespan"))
             {
-                PlayerPrefs.SetFloat("Clock_Lifespan", Time.fixedTime);
+                PlayerPrefs.SetFloat("Shade_Clock_Lifespan", Time.fixedTime);
             }
             
             DateTime now = DateTime.Now;
             DateTime then = DateTime.Now; // Will reference to last seen time
 
-            if (PlayerPrefs.HasKey("Clock_LastSeen"))
+            if (PlayerPrefs.HasKey("Shade_Clock_LastSeen"))
             {
                 // Grab the old time from the player prefs as a long
-                long temp = Convert.ToInt64(PlayerPrefs.GetString("Clock_LastSeen"));
+                long temp = Convert.ToInt64(PlayerPrefs.GetString("Shade_Clock_LastSeen"));
 
                 // Convert the old time from binary to a DataTime variable
                 then = DateTime.FromBinary(temp);
             }
 
-            //Use the Subtract method and store the result as a timespan variable
             TimeSpan difference = now.Subtract(then);
 
-            time = PlayerPrefs.GetFloat("Clock_Lifespan") + Convert.ToSingle(difference.TotalSeconds);
+            time = PlayerPrefs.GetFloat("Shade_Clock_Lifespan") + Convert.ToSingle(difference.TotalSeconds);
 
-            PlayerPrefs.SetFloat("Clock_Lifespan", time);
+            PlayerPrefs.SetFloat("Shade_Clock_Lifespan", time);
         }
 
         void Update()
         {
-            time = PlayerPrefs.GetFloat("Clock_Lifespan") + Time.fixedTime;
+            time = PlayerPrefs.GetFloat("Shade_Clock_Lifespan") + Time.fixedTime;
 
-            PlayerPrefs.SetFloat("Clock_Lifespan", time);
+            PlayerPrefs.SetFloat("Shade_Clock_Lifespan", time);
         }
 
         void OnApplicationQuit()
         {   
-            PlayerPrefs.SetString("Clock_LastSeen", System.DateTime.Now.ToBinary().ToString());
+            DateTime then = DateTime.Now;
+
+            // Grab the old time from the player prefs as a long
+            long temp = Convert.ToInt64(System.DateTime.Now.ToBinary().ToString());
+
+            // Convert the old time from binary to a DataTime variable
+            then = DateTime.FromBinary(temp);
+
+            PlayerPrefs.SetString("Shade_Clock_LastSeen", System.DateTime.Now.ToBinary().ToString());
         }
     }
 }
